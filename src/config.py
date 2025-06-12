@@ -3,8 +3,8 @@ FRAUD_THRESHOLD_BASELINE = 0.7
 FRAUD_THRESHOLD_V2 = 0.5
 
 # Model file paths
-MODEL_BASELINE = '../models/fraud_xgb_baseline.pkl'
-MODEL_V2 = '../models/fraud_xgb_v2_with_anomaly.pkl'
+MODEL_BASELINE = 'models/fraud_xgb_baseline.pkl'
+MODEL_V2 = 'models/fraud_xgb_v2_with_anomaly.pkl'
 
 # Features used in training (ordered)
 FEATURE_COLUMNS = [

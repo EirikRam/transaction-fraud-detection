@@ -1,0 +1,80 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: #1a1a1d;
+    color: #f4f4f4;
+}
+
+header {
+    background: linear-gradient(90deg, #c471ed, #f64f59);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+button {
+    background: #ff5ca2;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 1rem auto;
+    display: block;
+}
+
+button:hover {
+    background: #e04e91;
+}
+
+#loading {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
+
+table {
+    margin: 2rem auto;
+    width: 90%;
+    border-collapse: collapse;
+    background: #2e2e33;
+    box-shadow: 0 0 10px #000;
+}
+
+thead {
+    background: #4b4b4e;
+}
+
+th, td {
+    padding: 0.8rem;
+    text-align: center;
+    border-bottom: 1px solid #555;
+}
+
+.badge {
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.badge.safe {
+    background-color: #4caf50;
+}
+
+.badge.fraud {
+    background-color: #f44336;
+}
+
+.hidden {
+    display: none;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #bbb;
+    padding: 1rem;
+    margin-top: 2rem;
+}

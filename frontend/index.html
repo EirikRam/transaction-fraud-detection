@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fraud Detection Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>AI-Powered Fraud Detection</h1>
+        <p>Simulating account activity for real-time fraud detection</p>
+    </header>
+
+    <main>
+        <button id="generate-btn">Analyze Another Account</button>
+        <div id="loading">Loading account...</div>
+        <div id="summary" class="hidden"></div>
+        <table id="transactions" class="hidden">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>User</th>
+                    <th>Merchant</th>
+                    <th>Amount</th>
+                    <th>Location</th>
+                    <th>Device</th>
+                    <th>Fraud?</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>Created by Eric Ramirez | Powered by XGBoost & FastAPI</p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
