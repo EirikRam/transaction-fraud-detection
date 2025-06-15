@@ -1,6 +1,6 @@
 import pandas as pd
 from fastapi import FastAPI
-from backend.model_loader import predict_transaction_batch
+from backend.model_loader import predict_transaction_batch, explain_transaction
 from backend.user_data_simulator import generate_transactions
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -31,3 +31,17 @@ def simulate_transactions(n: int = 25):
                 row[key] = None  # Replace NaN with None for JSON serialization
 
     return JSONResponse(content=predictions)
+
+@app.post("/explain")
+def explain(txn: dict):
+    df = pd.DataFrame([txn])
+    shap_values = explain_transaction(df)
+    return JSONResponse(content={
+        "top_features": [
+            {
+                "feature": f,
+                "value": float(shap_values.values[0][i])  #  cast to native float!
+            }
+            for i, f in enumerate(shap_values.feature_names)
+        ]
+    })

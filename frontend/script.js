@@ -18,21 +18,40 @@ async function fetchData() {
 
     data.forEach(tx => {
         const tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td>${new Date(tx.timestamp).toLocaleString()}</td>
-            <td>${tx.user_id}</td>
-            <td>${tx.merchant_id}</td>
-            <td>$${tx.amount.toFixed(2)}</td>
-            <td>${tx.location}</td>
-            <td>${tx.device_id}</td>
-            <td><span class="badge ${tx.is_fraud ? 'fraud' : 'safe'}">
-                ${tx.is_fraud ? 'Fraud' : 'Safe'}
-            </span></td>
-        `;
-        tbody.appendChild(tr);
 
-        totalAmount += tx.amount;
+        const cells = [
+            new Date(tx.timestamp).toLocaleString(),
+            tx.user_id,
+            tx.merchant_id,
+            `$${Number(tx.amount).toFixed(2)}`,
+            tx.location,
+            tx.device_id,
+            null,  // fraud badge
+            null   // button
+        ];
+
+        cells.forEach((val, i) => {
+            const td = document.createElement("td");
+            if (i === 6) {
+                const span = document.createElement("span");
+                span.className = `badge ${tx.is_fraud ? "fraud" : "safe"}`;
+                span.textContent = tx.is_fraud ? "Fraud" : "Safe";
+                td.appendChild(span);
+            } else if (i === 7) {
+                const btn = document.createElement("button");
+                btn.className = "shap-btn";
+                btn.textContent = "Explain";
+                btn.addEventListener("click", () => fetchSHAP(tx));
+                td.appendChild(btn);
+            } else {
+                td.textContent = val;
+            }
+            tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
         if (tx.is_fraud) fraudCount++;
+        totalAmount += tx.amount;
     });
 
     summary.innerHTML = `
@@ -49,10 +68,36 @@ async function fetchData() {
 button.addEventListener("click", fetchData);
 window.addEventListener("load", fetchData);
 
-// fetch("/simulate")
-//   .then(response => response.json())
-//   .then(data => {
-//     console.log("Fetched transactions:", data);  // Debug line
-//     // rest of the render logic
-//   })
-//   .catch(error => console.error("Error fetching data:", error));
+async function fetchSHAP(transaction) {
+    try {
+        const response = await fetch("http://127.0.0.1:8000/explain", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(transaction),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("✅ SHAP response:", result);
+
+        if (!result.top_features || !Array.isArray(result.top_features)) {
+            throw new Error("Response missing 'top_features'");
+        }
+
+        const message = result.top_features.map(f =>
+            `${f.feature}: ${f.value.toFixed(3)}`
+        ).join("\n");
+
+        alert(`✅ Top features influencing prediction:\n\n${message}`);
+
+    } catch (err) {
+        console.error("❌ Error in fetchSHAP:", err);
+        alert(`Failed to fetch explanation: ${err.message}`);
+    }
+}
+
