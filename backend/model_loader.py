@@ -28,15 +28,6 @@ def predict_transaction_batch(df: pd.DataFrame):
     df["is_fraud"] = preds
     return df.to_dict(orient="records")
 
-# def explain_transaction(df_row):
-#     df_row = add_anomaly_score(df_row)
-#     df_row = preprocess_data(df_row)
-#
-#     explainer = shap.Explainer(model)
-#     shap_values = explainer(df_row)
-#
-#     return shap_values
-
 def explain_transaction(df_row):
     df_row["timestamp"] = pd.to_datetime(df_row["timestamp"])
     df_row["hour"] = df_row["timestamp"].dt.hour
@@ -46,7 +37,6 @@ def explain_transaction(df_row):
     df_row = add_anomaly_score(df_row)
     df_row = preprocess_data(df_row)
 
-    # 🚨 SELECT ONLY TRAINING COLUMNS — no extras
     X = df_row[FEATURE_COLUMNS_V3]
 
     explainer = shap.Explainer(model)

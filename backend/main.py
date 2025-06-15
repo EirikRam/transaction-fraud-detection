@@ -25,10 +25,10 @@ def simulate_transactions(n: int = 25):
 
     # Convert to serializable types
     for row in predictions:
-        row["timestamp"] = str(row["timestamp"])  # convert datetime to string
+        row["timestamp"] = str(row["timestamp"])
         for key in row:
             if pd.isna(row[key]):
-                row[key] = None  # Replace NaN with None for JSON serialization
+                row[key] = None
 
     return JSONResponse(content=predictions)
 
@@ -40,7 +40,7 @@ def explain(txn: dict):
         "top_features": [
             {
                 "feature": f,
-                "value": float(shap_values.values[0][i])  #  cast to native float!
+                "value": float(shap_values.values[0][i])
             }
             for i, f in enumerate(shap_values.feature_names)
         ]
