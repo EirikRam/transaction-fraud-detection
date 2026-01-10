@@ -3,6 +3,11 @@
 
 ![Main Dashboard.png](backend/assets/Main%20Dashboard.png)
 
+## Transaction Fraud Detection System Architecture
+
+![Transaction Fraud Detection System Architecture](https://github.com/user-attachments/assets/912fa15e-da2f-4584-b80a-030efe13d7df)
+
+
 ## Project Summary
 This project is a **full-stack AI-powered fraud detection system** that simulates financial transactions in real time, detects fraudulent behavior using a custom-trained machine learning model, and explains the model’s decisions with SHAP interpretability. It serves as an end-to-end demonstration of real-world fraud detection — from data simulation, feature engineering, model training, MLOps best practices, to a user-friendly web dashboard.
 
