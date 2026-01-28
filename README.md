@@ -1,7 +1,7 @@
 
 # AI-Powered Fraud Detection Dashboard
 
-![Main Dashboard.png](backend/assets/Main%20Dashboard.png)
+![Main Dashboard.png](backend/assets/Fraud%Detection%Dashboard.png)
 
 ## Transaction Fraud Detection System Architecture
 
