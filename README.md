@@ -1,7 +1,9 @@
 
 # AI-Powered Fraud Detection Dashboard
 
-![Main Dashboard.png](backend/assets/Fruad%Detection%Dashboard.png)
+![AI-Powered Fraud Detection Dashboard](backend/assets/fraud-detection-dashboard.png)
+
+*Real-time transaction monitoring dashboard with ML-driven fraud classification and SHAP-based explainability.*
 
 ## Transaction Fraud Detection System Architecture
 
